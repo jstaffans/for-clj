@@ -24,5 +24,7 @@
 
 ; 54
 (defn my-partition
-  [x]
-  x)
+  [n coll]
+  (when (seq coll)
+    (let [[p rest] (filter #(<= n (count %)) (split-at n coll))]
+      (cons p (my-partition n rest)))))
