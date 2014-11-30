@@ -28,3 +28,9 @@
   (when (seq coll)
     (let [[p rest] (filter #(<= n (count %)) (split-at n coll))]
       (cons p (my-partition n rest)))))
+
+; 70
+(defn word-sort
+  [s]
+  (->> (re-seq #"\w+" s)
+       (sort-by clojure.string/lower-case)))
