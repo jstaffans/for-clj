@@ -34,3 +34,28 @@
   [s]
   (->> (re-seq #"\w+" s)
        (sort-by clojure.string/lower-case)))
+
+; 77
+
+(defn permutations
+  ([word]
+   (permutations "" word))
+  ([prefix word]
+   (if (= 1 (count word))
+     [(str prefix word)]
+     (flatten
+       (for [i (range (count word))]
+         (let [cur (.charAt word i)
+               before (subs word 0 i)
+               after (subs word (inc i))]
+           (permutations (str prefix cur) (str before after))))))))
+
+; But actually we don't need permutations to find anagrams!
+
+(defn to-anagram-sets
+  [coll]
+  (->> (group-by #(sort %) coll)
+       (filter #(> (count (second %)) 1))
+       vals (map set) set))
+
+
