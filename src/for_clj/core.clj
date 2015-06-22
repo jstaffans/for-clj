@@ -58,4 +58,17 @@
        (filter #(> (count (second %)) 1))
        vals (map set) set))
 
+; 67
+
+(defn find-n-primes
+  "Finds n first prime numbers"
+  [n]
+  (letfn [(is-prime? [candidate all-found]
+                     (not-any? #(zero? (mod candidate %)) all-found))]
+    (loop [acc []
+           i 2]
+      (if (= n (count acc))
+        acc
+        (recur (if (is-prime? i acc) (conj acc i) acc) (inc i))))))
+
 
