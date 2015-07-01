@@ -71,4 +71,15 @@
         acc
         (recur (if (is-prime? i acc) (conj acc i) acc) (inc i))))))
 
+; 74
 
+(defn perfect-squares
+  [s]
+  (letfn [(split-str [s]
+            (map #(Integer/parseInt %) (re-seq #"\d+" s)))
+          (perfect-squares-until [x]
+            (take-while (partial >= x) (map #(* % %) (iterate inc 1))))]
+    (->> (split-str s)
+         (filter #(some #{%} (perfect-squares-until %)))
+         (interpose ",")
+         (apply str))))
