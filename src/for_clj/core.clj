@@ -83,3 +83,10 @@
          (filter #(some #{%} (perfect-squares-until %)))
          (interpose ",")
          (apply str))))
+
+;; 80
+
+(defn perfect-number?
+  [n]
+  (let [divisors (filter #(zero? (mod n %)) (range 1 (inc (/ n 2))))]
+    (= n (apply + divisors))))
