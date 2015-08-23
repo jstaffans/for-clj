@@ -90,3 +90,11 @@
   [n]
   (let [divisors (filter #(zero? (mod n %)) (range 1 (inc (/ n 2))))]
     (= n (apply + divisors))))
+
+
+;; 102
+
+(defn into-camel-case
+  [s]
+  (let [parts (clojure.string/split s #"-")]
+    (apply str (first parts) (map clojure.string/capitalize (rest parts)))))
